@@ -1,12 +1,15 @@
 # PortSwigger Labs Writeups
-This repository contains my writeups while learning web application security
-from PortSwigger Web Security Academy.
 
-## Topics
+This repository contains my personal writeups while learning
+web application security from PortSwigger Web Security Academy.
+
+## Covered Topics
 - SQL Injection
-- Authentication (upcoming)
+- Authentication
+- Access Control
+- Cross-Site Scripting (XSS)
 
 ## Purpose
-- Practice web hacking
-- Build proof of skills
-h
+- Build strong fundamentals
+- Maintain structured learning notes
+- Create public proof of hands-on practice
