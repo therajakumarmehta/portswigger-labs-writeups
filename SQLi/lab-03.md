@@ -14,7 +14,7 @@ Category parameter
   UNION SELECT BANNER, NULL FROM v$version--
 
 ## Result
-Identified the database type and version of Oracle..
+ Identified the database type and version of Oracle..
 
 ## Learning
 - UNION-based SQL injection can be used to identify the backend database when query output is reflected.
