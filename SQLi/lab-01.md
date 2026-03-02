@@ -11,7 +11,8 @@ Login as administrator.
 Username parameter
 
 ## Payload Used
-' OR 1=1--
+ administrator'--
+ <img width="1858" height="958" alt="1" src="https://github.com/user-attachments/assets/a941c110-e519-4258-bd91-67b9d1252e85" />
 
 ## Result
 Logged in as administrator and lab solved.
