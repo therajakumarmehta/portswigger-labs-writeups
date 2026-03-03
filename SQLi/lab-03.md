@@ -25,6 +25,7 @@ Determine number of columns
 <img width="1491" height="773" alt="1 4" src="https://github.com/user-attachments/assets/b60cdba8-b756-4455-878f-e5c435ec675b" />
 
 Test which column accept text
+
 ' UNION SELECT 'test', NULL, NULL--
 <img width="1498" height="802" alt="1 5" src="https://github.com/user-attachments/assets/9d1777e1-74f0-4dc0-ad34-222ae6baf1e0" />
 
