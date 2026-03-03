@@ -12,6 +12,7 @@ Category parameter
 
 ## Payload Used
 Determine number of columns
+
 ' ORDER BY 1--
 <img width="1502" height="762" alt="1 1" src="https://github.com/user-attachments/assets/aecaada7-5e19-4e6a-a11e-34237cf2464d" />
 
