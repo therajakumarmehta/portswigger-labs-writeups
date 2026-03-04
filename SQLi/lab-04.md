@@ -33,7 +33,9 @@ Successfully Identified administrator username and password from other table.
 <img width="1853" height="918" alt="image" src="https://github.com/user-attachments/assets/4b2a88e6-bcf2-4b59-ad9b-e4dc444ebf8e" />
 
 ## Learning
-ORDER BY is used to determine the number of columns.
-UNION SELECT must match the exact number of columns.
-NULL is used as a placeholder when data types are unkonwn
+UNION SELECT NULL, NULL is used to determine the exact number of columns.
+
+UNION SELECT 'test', 'test' is used to check which column conten text
+
+
 Final UNION query extract data.
