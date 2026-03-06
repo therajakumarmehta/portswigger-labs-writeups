@@ -18,15 +18,18 @@ Category parameter
 
 
 ## Result
+
 Identified all username and their password from multiple values in a single column.
 
 <img width="1488" height="806" alt="3 3" src="https://github.com/user-attachments/assets/8b30e7b5-dcf4-4614-9964-e09e3d70f6fc" />
 
 
 ## Impact
+
 Attacker can extract sensitive user credentials from the database.
 
 ## Learning
+
 ORDER BY is used to determine the number of columns.
 
 UNION SELECT must match the exact number of columns.
@@ -34,4 +37,5 @@ UNION SELECT must match the exact number of columns.
 NULL is used as a placeholder when data types are unkonwn
 
 String concatenation ( || ) can be used to merge values into a single column and '~' is used to seperate two values.
+
 Final UNION query extract data.
