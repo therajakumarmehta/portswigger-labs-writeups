@@ -28,7 +28,10 @@ Attacker can extract sensitive user credentials from the database.
 
 ## Learning
 ORDER BY is used to determine the number of columns.
+
 UNION SELECT must match the exact number of columns.
+
 NULL is used as a placeholder when data types are unkonwn
+
 String concatenation ( || ) can be used to merge values into a single column and '~' is used to seperate two values.
 Final UNION query extract data.
