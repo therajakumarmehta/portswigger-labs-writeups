@@ -11,10 +11,17 @@ Exploit UNION-based SQL Injection to retrieving multiple values in a single colu
 Category parameter
 
 ## Payload Used
-  UNION SELECT NULL, username ||'~'|| password FROM users--
+
+' UNION SELECT NULL, username ||'~'|| password FROM users--
+
+  <img width="1496" height="762" alt="3 1" src="https://github.com/user-attachments/assets/67e42bb2-7523-4eb7-8de3-3e12d0999cf2" />
+
 
 ## Result
 Identified all username and their password from multiple values in a single column.
+
+<img width="1488" height="806" alt="3 3" src="https://github.com/user-attachments/assets/8b30e7b5-dcf4-4614-9964-e09e3d70f6fc" />
+
 
 ## Impact
 Attacker can extract sensitive user credentials from the database.
