@@ -5,7 +5,7 @@ SQL injection UNION attack, retrieving data from other tables
 SQL Injection (UNION-based)
 
 ## Objective
-Exploit UNION-based SQL Injection to retrieving data from other tables
+Exploit UNION-based SQL Injection to retrieving data from other tables 
 
 ## Entry Point
 Category parameter
