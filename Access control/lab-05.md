@@ -5,7 +5,7 @@ User ID controlled by request parameter
 Access Control Vulnerability – Insecure Direct Object Reference (IDOR)
 
 ## Objective
-Access another user’s account (administrator) by modifying the user ID parameter.
+Obtain the carlos API key by modifying the user ID parameter.
 
 ## Entry Point
 User account page URL parameter (id)
@@ -42,7 +42,7 @@ Modified:
 id=carlos
 
 ## Result
-Successfully accessed the carlos account by modifying the user ID parameter. Then Copy the API of carlos user and submit as solution.
+Successfully accessed the API of carlos user and submit as solution.
 
 ## Impact
 - Unauthorized access to other user accounts
