@@ -1,9 +1,6 @@
 ## Lab Name
 User role can be modified in user profile
 
-## Platform
-PortSwigger Web Security Academy
-
 ## Vulnerability
 Access Control Vulnerability – Privilege Escalation via User Profile Modification
 
