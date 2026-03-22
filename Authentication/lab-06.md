@@ -62,6 +62,8 @@ token= (removed/modified)
 ## Result
 Successfully reset the password of user carlos and logged into the account.
 
+<img width="1838" height="920" alt="image" src="https://github.com/user-attachments/assets/f8ead95d-7941-4d89-9896-d5e6cff28fa2" />
+
 ## Impact
 - Unauthorized password reset
 - Full account takeover
