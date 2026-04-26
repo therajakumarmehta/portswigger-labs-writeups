@@ -1,6 +1,6 @@
 ## Lab Name
 Multi-step process with no access control on one step
-
+ 
 ## Vulnerability
 Access Control Vulnerability – Broken Access Control in Multi-step Process
 
