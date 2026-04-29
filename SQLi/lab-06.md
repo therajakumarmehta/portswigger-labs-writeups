@@ -12,9 +12,15 @@ Category parameter
 
 ## Payload Used
   UNION SELECT BANNER, NULL FROM v$version--
+  
+  <img width="1492" height="828" alt="Screenshot 2026-04-29 132159" src="https://github.com/user-attachments/assets/71bb565f-6f7f-441e-9a77-a63ff9dd31bb" />
+
 
 ## Result
  Identified the database type and version of Oracle..
+ 
+ <img width="1875" height="887" alt="Screenshot 2026-04-29 132321" src="https://github.com/user-attachments/assets/890d90e9-d4c5-46b0-90ad-33256947e139" />
+
 
 ## Learning
 - UNION-based SQL injection can be used to identify the backend database when query output is reflected.
