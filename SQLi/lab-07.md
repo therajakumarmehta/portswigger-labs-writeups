@@ -1,6 +1,8 @@
 # Lab Name
 SQL injection attack, querying the database type and version on MySQL and Microsoft
 
+<img width="1843" height="913" alt="Screenshot 2026-05-01 003151" src="https://github.com/user-attachments/assets/1475a507-0d7f-4021-80d7-c69f6e03f617" />
+
 ## Vulnerability
 SQL Injection (UNION-based)
 
@@ -13,8 +15,14 @@ Category parameter
 ## Payload Used
   UNION SELECT NULL, @@version#
 
+  <img width="1505" height="793" alt="1 2" src="https://github.com/user-attachments/assets/54dc1cf3-99ae-41ca-b42c-ea70ee473946" />
+
+
 ## Result
 Identified the database type and version using @@version indicating  MySQL/Microsoft SQL Server.
+
+<img width="1507" height="786" alt="1 3" src="https://github.com/user-attachments/assets/80daccf7-be9e-47fd-a17b-882be12abb00" />
+
 
 ## Learning
 - UNION-based SQL injection can be used to identify the backend database when query output is reflected.
