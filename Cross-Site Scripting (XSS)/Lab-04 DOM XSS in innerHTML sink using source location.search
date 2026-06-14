@@ -1,0 +1,59 @@
+# Lab Name
+DOM XSS in innerHTML sink using source location.search
+
+## Vulnerability
+Cross-Site Scripting (XSS) – DOM-Based XSS
+
+## Objective
+Exploit a DOM-based XSS vulnerability and execute JavaScript in the browser.
+
+## Entry Point
+URL query string (location.search)
+
+## Exploitation Type
+DOM-Based XSS
+
+## Methodology
+1. Open the lab and inspect the search functionality
+
+2. Observe that user input is taken from:
+   location.search
+
+3. Notice that the input is inserted into the page using:
+   element.innerHTML
+
+4. Since the application does not properly sanitize the input, HTML elements can be injected into the DOM
+
+5. Inject a payload that triggers JavaScript execution through an HTML event handler
+
+6. Append the payload to the search parameter in the URL
+
+7. Load the URL in the browser
+
+8. Observe that the payload executes successfully
+
+## Payload Used
+
+<img src=1 onerror=alert(1)>
+
+## Result
+Successfully executed arbitrary JavaScript through a DOM-based XSS vulnerability.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Defacement of web pages
+- Account compromise
+
+## Mitigation
+- Avoid inserting untrusted data using innerHTML
+- Use textContent or innerText for rendering user input
+- Sanitize user-controlled input before inserting it into the DOM
+- Implement Content Security Policy (CSP)
+- Perform proper client-side and server-side validation
+
+## Learning
+DOM-based XSS occurs when client-side JavaScript processes untrusted data and inserts it into the page without proper sanitization.
+Using innerHTML with user-controlled input can lead to arbitrary JavaScript execution.
