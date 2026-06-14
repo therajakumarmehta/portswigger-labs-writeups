@@ -11,7 +11,7 @@ Execute JavaScript in the victim's browser by injecting a malicious payload.
 Search functionality (URL parameter)
 
 ## Exploitation Type
-Reflected XSS / Input Injection
+Reflected XSS / Input Injection 
 
 ## Methodology
 1. Open the lab and locate the search functionality
