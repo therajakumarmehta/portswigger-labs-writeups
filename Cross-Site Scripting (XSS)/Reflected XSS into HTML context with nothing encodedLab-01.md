@@ -5,7 +5,7 @@ Reflected XSS into HTML context with nothing encoded
 Cross-Site Scripting (XSS) – Reflected XSS
 
 ## Objective
-Execute JavaScript in the victim's browser by injecting a malicious payload.
+Execute JavaScript in the victim's browser by injecting a malicious payload. 
 
 ## Entry Point
 Search functionality (URL parameter)
