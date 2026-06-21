@@ -1,0 +1,58 @@
+# Lab Name
+Reflected XSS into attribute with angle brackets HTML-encoded
+
+## Vulnerability
+Cross-Site Scripting (XSS) – Reflected XSS
+
+## Objective
+Exploit a reflected XSS vulnerability where angle brackets are HTML-encoded but user input is reflected inside an HTML attribute.
+
+## Entry Point
+Search functionality
+
+## Exploitation Type
+Reflected XSS / Attribute Injection
+
+## Methodology
+1. Open the lab and locate the search functionality
+
+2. Submit a normal search request
+
+3. Observe that the search term is reflected inside an HTML attribute value
+
+4. Notice that angle brackets (< and >) are HTML-encoded, preventing direct tag injection
+
+5. Since the input is placed inside an attribute, inject a double quote to break out of the attribute value
+
+6. Add a new event handler attribute containing JavaScript code
+
+7. Submit the payload through the search parameter
+
+8. Trigger the event by moving the mouse over the affected element
+
+9. Observe that JavaScript executes successfully
+
+## Payload Used
+
+" onmouseover="alert(1)
+
+## Result
+Successfully executed arbitrary JavaScript by breaking out of an HTML attribute and injecting an event handler.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Account compromise
+
+## Mitigation
+- Properly encode user input for HTML attributes
+- Escape quotation marks and special characters
+- Validate and sanitize user input
+- Implement Content Security Policy (CSP)
+- Use secure templating frameworks
+
+## Learning
+HTML encoding angle brackets alone is not sufficient to prevent XSS.
+When user input is reflected inside an HTML attribute, attackers may be able to inject new attributes and event handlers if quotation marks are not properly encoded.
