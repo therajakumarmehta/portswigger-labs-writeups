@@ -1,0 +1,58 @@
+# Lab Name
+Reflected XSS into a JavaScript string with angle brackets HTML encoded
+
+## Vulnerability
+Cross-Site Scripting (XSS) – Reflected XSS
+
+## Objective
+Exploit a reflected XSS vulnerability by breaking out of a JavaScript string and executing arbitrary JavaScript.
+
+## Entry Point
+Search functionality
+
+## Exploitation Type
+Reflected XSS / JavaScript Context Injection
+
+## Methodology
+1. Open the lab and locate the search functionality
+
+2. Submit a normal search request
+
+3. Observe that the search term is reflected inside a JavaScript string
+
+4. Notice that angle brackets (< and >) are HTML-encoded, preventing direct script tag injection
+
+5. Since the input is placed inside a JavaScript string, break out of the string context
+
+6. Inject JavaScript code followed by a comment to prevent syntax errors
+
+7. Submit the payload through the search parameter
+
+8. Load the response page
+
+9. Observe that the injected JavaScript executes successfully
+
+## Payload Used
+
+'-alert(1)-'
+
+## Result
+Successfully executed arbitrary JavaScript by breaking out of a JavaScript string context.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Account compromise
+
+## Mitigation
+- Properly escape user input before inserting it into JavaScript contexts
+- Use context-aware output encoding
+- Avoid dynamically generating JavaScript with user input
+- Implement Content Security Policy (CSP)
+- Validate and sanitize all user-controlled input
+
+## Learning
+HTML encoding angle brackets alone does not prevent XSS.
+When user input is reflected inside JavaScript strings, attackers can break out of the string and inject arbitrary JavaScript if special characters are not properly escaped.
