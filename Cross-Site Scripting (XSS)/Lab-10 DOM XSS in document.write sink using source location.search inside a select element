@@ -1,0 +1,63 @@
+# Lab Name
+DOM XSS in document.write sink using source location.search inside a select element
+
+## Vulnerability
+Cross-Site Scripting (XSS) – DOM-Based XSS
+
+## Objective
+Exploit a DOM-based XSS vulnerability and execute JavaScript in the browser.
+
+## Entry Point
+URL query string (location.search)
+
+## Exploitation Type
+DOM-Based XSS
+
+## Methodology
+1. Open the lab and inspect the page source
+
+2. Observe that user input is taken from:
+
+   location.search
+
+3. Notice that the value is written to the page using:
+
+   document.write()
+
+4. The input is inserted inside a select element
+
+5. Since the application does not properly sanitize user input, it is possible to break out of the select context
+
+6. Inject a payload that closes the current element and introduces an element containing a JavaScript event
+
+7. Append the payload to the URL parameter
+
+8. Load the page
+
+9. Observe that the JavaScript executes successfully
+
+## Payload Used
+
+</select><img src=1 onerror=alert(1)>
+
+## Result
+Successfully executed arbitrary JavaScript through a DOM-based XSS vulnerability.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Account compromise
+- Manipulation of page content
+
+## Mitigation
+- Avoid using document.write() with untrusted data
+- Sanitize and validate all user-controlled input
+- Use safe DOM manipulation methods such as textContent
+- Implement Content Security Policy (CSP)
+- Perform proper output encoding
+
+## Learning
+DOM-based XSS can occur when user-controlled data is inserted into the DOM without proper sanitization.
+Even when input is placed inside specific HTML elements such as select tags, attackers may escape the context and inject executable content.
