@@ -1,0 +1,58 @@
+# Lab Name
+Stored XSS into anchor href attribute with double quotes HTML-encoded
+
+## Vulnerability
+Cross-Site Scripting (XSS) – Stored XSS
+
+## Objective
+Store a malicious payload that executes JavaScript when a user clicks a link.
+
+## Entry Point
+Website field in the comment submission form
+
+## Exploitation Type
+Stored XSS / Attribute Injection
+
+## Methodology
+1. Open the lab and navigate to a blog post
+
+2. Locate the comment submission form
+
+3. Observe that comments allow a Website field
+
+4. Notice that the Website value is reflected into an anchor (href) attribute
+
+5. Since double quotes are HTML-encoded, direct attribute injection is not possible
+
+6. Use the javascript: URI scheme as the website value
+
+7. Submit the comment with a valid name, email, and the malicious website value
+
+8. Publish the comment
+
+9. When a user clicks on the author name, the JavaScript payload executes
+
+## Payload Used
+
+javascript:alert(1)
+
+## Result
+Successfully stored a malicious payload that executes JavaScript when the generated link is clicked.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Account compromise
+
+## Mitigation
+- Validate and sanitize URL inputs
+- Disallow dangerous protocols such as javascript:
+- Implement allowlists for accepted URL schemes (http, https)
+- Apply Content Security Policy (CSP)
+- Perform proper output encoding and input validation
+
+## Learning
+Even when quotation marks are encoded, XSS can occur if user-controlled data is placed inside href attributes without validating the URL scheme.
+Applications should restrict dangerous protocols such as javascript: to prevent script execution.
