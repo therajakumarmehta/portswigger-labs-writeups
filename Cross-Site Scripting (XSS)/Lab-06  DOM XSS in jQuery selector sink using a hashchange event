@@ -1,0 +1,63 @@
+# Lab Name
+DOM XSS in jQuery selector sink using a hashchange event
+
+## Vulnerability
+Cross-Site Scripting (XSS) – DOM-Based XSS
+
+## Objective
+Exploit a DOM-based XSS vulnerability through a jQuery selector sink triggered by a hashchange event.
+
+## Entry Point
+URL Fragment (location.hash)
+
+## Exploitation Type
+DOM-Based XSS
+
+## Methodology
+1. Open the lab and inspect the page source
+
+2. Observe that the application reads data from:
+
+   location.hash
+
+3. Notice that the value is passed into a jQuery selector sink
+
+4. The selector is processed whenever a hashchange event occurs
+
+5. Since the input is not properly sanitized, it is possible to inject malicious HTML containing an event handler
+
+6. Craft a payload and place it in the URL fragment
+
+7. Trigger the hashchange event by loading the page with the payload
+
+8. Observe that the payload is processed by jQuery and JavaScript executes
+
+## Payload Used
+
+<iframe src="https://0a6200f60373655b80de1cb1005400d1.web-security-academy.net/"></iframe>
+
+Exploit Server Payload:
+
+<iframe onload="this.src+='#{<img src=1 onerror=alert(1)>}'"></iframe>
+
+## Result
+Successfully executed arbitrary JavaScript through a DOM-based XSS vulnerability triggered by a hashchange event.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- User account compromise
+- Manipulation of page content
+
+## Mitigation
+- Avoid passing untrusted data into jQuery selectors
+- Sanitize and validate data from location.hash
+- Use safe DOM APIs instead of dynamic selectors
+- Implement Content Security Policy (CSP)
+- Perform proper input validation and output encoding
+
+## Learning
+DOM-based XSS can occur when user-controlled data from location.hash is passed into jQuery selector functions without validation.
+Applications should never trust URL fragments and must sanitize all client-side inputs before processing them.
