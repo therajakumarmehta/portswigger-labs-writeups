@@ -1,0 +1,60 @@
+# Lab Name
+Reflected XSS into HTML context with most tags and attributes blocked
+
+## Vulnerability
+Cross-Site Scripting (XSS) – Reflected XSS with Partial Input Filtering
+
+## Objective
+Exploit a reflected XSS vulnerability despite restrictions on most HTML tags and attributes.
+
+## Entry Point
+Search functionality
+
+## Exploitation Type
+Reflected XSS / Filter Bypass
+
+## Methodology
+1. Open the lab and locate the search functionality
+
+2. Test basic XSS payloads and observe that most HTML tags and attributes are blocked
+
+3. Identify which tags and attributes are still allowed by the filter
+
+4. Determine that the following payload bypasses the filter restrictions
+
+5. Inject the payload into the search parameter
+
+6. Submit the request
+
+7. Trigger the associated event if required
+
+8. Observe that JavaScript executes successfully
+
+## Payload Used
+
+<body onresize=print()>
+
+Exploit Server
+
+<iframe src="https://0ad600bb0452c3e0815a350c00f90084.web-security-academy.net?search=<body onresize=print()>" onload=this.style.width='100px'>
+
+## Result
+Successfully bypassed the filtering mechanism and executed arbitrary JavaScript.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Account compromise
+
+## Mitigation
+- Do not rely on blacklist-based filtering
+- Implement proper context-aware output encoding
+- Use allowlist-based HTML sanitization
+- Apply Content Security Policy (CSP)
+- Validate and sanitize all user-controlled input
+
+## Learning
+Blocking only specific tags and attributes is not sufficient to prevent XSS.
+Attackers can often identify alternative tags, events, or browser behaviors to bypass filters and execute JavaScript.
