@@ -1,0 +1,61 @@
+# Lab Name
+DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded
+
+## Vulnerability
+Cross-Site Scripting (XSS) – DOM-Based XSS (AngularJS Expression Injection)
+
+## Objective
+Exploit a DOM-based XSS vulnerability by injecting an AngularJS expression and executing JavaScript.
+
+## Entry Point
+URL query string (location.search)
+
+## Exploitation Type
+DOM-Based XSS / AngularJS Expression Injection
+
+## Methodology
+1. Open the lab and inspect the page source
+
+2. Observe that user input is taken from:
+
+   location.search
+
+3. Notice that the application uses AngularJS to process and render the input
+
+4. Verify that angle brackets (< >) and double quotes (") are HTML-encoded
+
+5. Since AngularJS expressions are evaluated inside {{ }} blocks, direct HTML injection is not required
+
+6. Inject a malicious AngularJS expression into the search parameter
+
+7. Submit the payload through the URL
+
+8. Load the page
+
+9. Observe that AngularJS evaluates the expression and executes JavaScript
+
+## Payload Used
+
+{{$on.constructor('alert(1)')()}}
+
+## Result
+Successfully executed arbitrary JavaScript through AngularJS expression injection.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Account compromise
+- Manipulation of page content
+
+## Mitigation
+- Disable evaluation of untrusted AngularJS expressions
+- Upgrade vulnerable AngularJS versions
+- Sanitize and validate all user-controlled input
+- Implement Content Security Policy (CSP)
+- Avoid rendering user input inside AngularJS templates
+
+## Learning
+Even when angle brackets and quotes are encoded, AngularJS expressions may still be evaluated by the framework.
+Applications using client-side template engines must treat template expressions as executable code and properly sanitize untrusted input.
