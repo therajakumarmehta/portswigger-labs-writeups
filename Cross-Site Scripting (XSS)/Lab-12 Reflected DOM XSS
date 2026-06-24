@@ -1,0 +1,59 @@
+# Lab Name
+Reflected DOM XSS
+
+## Vulnerability
+Cross-Site Scripting (XSS) – Reflected DOM-Based XSS
+
+## Objective
+Exploit a DOM-based XSS vulnerability and execute JavaScript in the victim's browser.
+
+## Entry Point
+URL parameter processed by client-side JavaScript
+
+## Exploitation Type
+DOM-Based XSS
+
+## Methodology
+1. Open the lab and inspect the application's functionality
+
+2. Observe that user input is read from the URL
+
+3. Notice that client-side JavaScript processes the input and inserts it into the page
+
+4. Identify a vulnerable DOM sink where the input is reflected without proper sanitization
+
+5. Craft a malicious payload
+
+6. Append the payload to the vulnerable URL parameter
+
+7. Load the modified URL
+
+8. The browser processes the client-side script
+
+9. Observe that the injected JavaScript executes successfully
+
+## Payload Used
+
+<svg onload=alert(1)>
+
+## Result
+Successfully executed arbitrary JavaScript through a reflected DOM-based XSS vulnerability.
+
+## Impact
+- Execution of arbitrary JavaScript
+- Session hijacking
+- Cookie theft
+- Phishing attacks
+- Account compromise
+- Manipulation of page content
+
+## Mitigation
+- Sanitize and validate all user-controlled input
+- Avoid inserting untrusted data into DOM sinks
+- Use safe APIs such as textContent instead of innerHTML
+- Implement Content Security Policy (CSP)
+- Perform context-aware output encoding
+
+## Learning
+DOM-based XSS occurs when client-side JavaScript processes untrusted input and inserts it into the DOM without proper sanitization.
+Unlike traditional reflected XSS, the vulnerability exists entirely in the browser and may not be visible in the server response.
