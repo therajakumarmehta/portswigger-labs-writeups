@@ -8,6 +8,7 @@ web application security from PortSwigger Web Security Academy.
 - Authentication
 - Access Control
 - Cross-Site Scripting (XSS)
+- Cross-site request forgery (CSRF)
 
 ## Purpose
 - Build strong fundamentals
