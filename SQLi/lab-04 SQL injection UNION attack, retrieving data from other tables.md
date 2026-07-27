@@ -37,5 +37,4 @@ UNION SELECT NULL, NULL is used to determine the exact number of columns.
 
 UNION SELECT 'test', 'test' is used to check which column conten text
 
-
 Final UNION query extract data.
