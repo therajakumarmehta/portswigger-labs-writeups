@@ -24,7 +24,9 @@ Blind SQL Injection (Time Delay)
 7. The server response was delayed, confirming that the SQL query was executed by the database.
 
 ## Payload Used
-TrackingId=xyz'||pg_sleep(10)--
+TrackingId=sO8wTqqsukHeyDU2'||pg_sleep(10)--
+
+<img width="1920" height="790" alt="1 7" src="https://github.com/user-attachments/assets/80f13071-2244-4fe9-8228-aa475ed4eefe" />
 
 ## Result
 The server response was delayed by 10 seconds, confirming that the injected SQL query was executed successfully and that the application is vulnerable to Blind SQL Injection.
