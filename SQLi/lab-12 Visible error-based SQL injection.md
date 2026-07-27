@@ -23,10 +23,14 @@ Visible Error-Based SQL Injection
 7. Used the extracted credentials to log in as the administrator.
 
 ## Payload Used
-TrackingId=' AND CAST((SELECT password FROM users LIMIT 1) AS int)--
+TrackingId=' AND CAST((SELECT password FROM users LIMIT 1) AS bool)--
+
+<img width="1482" height="791" alt="4" src="https://github.com/user-attachments/assets/34ea9e50-45ac-41d0-a474-ff13010502cd" />
 
 ## Result
 Successfully extracted the administrator password from the database and logged in as the administrator account.
+
+<img width="1857" height="981" alt="image" src="https://github.com/user-attachments/assets/d4bc5306-37dd-4cb7-b8f6-3095bd0a2ce9" />
 
 ## Impact
 An attacker can retrieve sensitive data such as usernames and passwords directly from the database through visible error messages.
