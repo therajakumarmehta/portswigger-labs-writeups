@@ -16,7 +16,7 @@ Direct Object Reference / File Path Manipulation
 ## Methodology
 1. Login with provided user credentials
 
-2. Navigate to the chat functionality
+2. Navigate to the chat functionality 
 
 3. Send a message and observe that chat logs are stored on the server
 
