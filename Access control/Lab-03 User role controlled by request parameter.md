@@ -5,7 +5,7 @@ User role controlled by request parameter
 PortSwigger Web Security Academy
 
 ## Vulnerability
-Access Control Vulnerability – Privilege Escalation via Request Parameter
+Access Control Vulnerability – Privilege Escalation via Request Parameter 
 
 ## Objective
 Delete the user **carlos** by gaining administrator privileges.
