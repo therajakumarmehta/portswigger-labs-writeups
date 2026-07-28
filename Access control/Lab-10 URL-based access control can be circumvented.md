@@ -11,7 +11,7 @@ Access the admin panel and delete the user carlos.
 /admin endpoint (blocked by front-end control)
 
 ## Exploitation Type
-Header Manipulation / Access Control Bypass
+Header Manipulation / Access Control Bypass 
 
 ## Methodology
 1. Open the lab and observe that /admin endpoint exists but is blocked
