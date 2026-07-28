@@ -11,7 +11,7 @@ Gain administrator privileges and delete the user **carlos**.
 User profile update functionality
 
 ## Exploitation Type
-Parameter Tampering / Privilege Escalation
+Parameter Tampering / Privilege Escalation 
 
 ## Methodology
 1. Opened the lab and logged in with the provided user credentials.
