@@ -1,5 +1,5 @@
 ## Lab Name
-Method-based access control can be circumvented
+Method-based access control can be circumvented 
 
 ## Vulnerability
 Access Control Vulnerability – Broken Access Control (HTTP Method Bypass)
