@@ -11,7 +11,7 @@ Obtain the carlos API key by exploiting data leakage in a redirect.
 User account/profile endpoint with id parameter
 
 ## Exploitation Type
-Parameter Tampering + Information Disclosure
+Parameter Tampering + Information Disclosure 
 
 ## Methodology
 1. Login with provided user credentials
