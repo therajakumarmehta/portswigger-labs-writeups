@@ -18,7 +18,11 @@ Brute Force / Authentication Flaw
 
 2. Navigate to the **Change Password** page.
 
+<img width="1852" height="911" alt="1" src="https://github.com/user-attachments/assets/ca325ad9-633a-4b60-ac53-a5d7119a8d36" />
+
 3. Intercept the password change request using Burp Suite.
+
+<img width="1499" height="925" alt="1 2" src="https://github.com/user-attachments/assets/ea3eed00-69b6-4550-9a73-19a674f54e80" />
 
 4. Send the request to Burp Suite Intruder.
 
@@ -30,6 +34,8 @@ Brute Force / Authentication Flaw
 
 8. Start the Intruder attack using a password wordlist.
 
+<img width="1861" height="880" alt="1 4" src="https://github.com/user-attachments/assets/5836d876-cdc2-412a-9eec-a90569d7a59c" />
+
 9. Observe the server responses.
 
 10. Most requests return an error indicating that the current password is incorrect.
@@ -38,9 +44,13 @@ Brute Force / Authentication Flaw
 
     **"New passwords do not match."**
 
+<img width="1892" height="955" alt="1 6" src="https://github.com/user-attachments/assets/755f15be-8c5d-4461-94e5-19a8e063b6b7" />
+
 12. This different response confirms the correct password for **carlos**.
 
 13. Log in as **carlos** using the discovered password and complete the lab.
+
+<img width="1842" height="962" alt="image" src="https://github.com/user-attachments/assets/dba2fcae-62d9-4de0-961f-f6ff5ded6649" />
 
 ## Payload Used
 
@@ -51,10 +61,10 @@ Current Password:
 §password§
 
 New Password:
-Password123
+xyz
 
 Confirm Password:
-Password456
+abc
 
 ## Result
 Successfully identified the correct password for **carlos** by detecting the **"New passwords do not match"** response and logged in to the victim's account, solving the lab.
