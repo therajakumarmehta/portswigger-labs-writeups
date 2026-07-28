@@ -14,7 +14,7 @@ User account page URL parameter (id)
 Parameter Tampering / IDOR
 
 ## Methodology
-1. Login with provided user credentials
+1. Login with provided user credentials 
 2. Navigate to My Account page
 
    Example:
