@@ -8,7 +8,7 @@ Access Control Vulnerability – Insecure Direct Object Reference (IDOR)
 Access the API key of carlos account by obtaining and using its unpredictable user ID.
 
 ## Entry Point
-User profile access via user ID parameter
+User profile access via user ID parameter 
 
 ## Exploitation Type
 Information Disclosure + Parameter Tampering
