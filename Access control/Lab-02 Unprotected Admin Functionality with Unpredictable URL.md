@@ -11,7 +11,7 @@ Access Control Vulnerability – Unprotected Admin Functionality
 Access the hidden admin panel and delete the user **carlos**.
 
 ## Entry Point
-Admin panel URL exposed inside a JavaScript file.
+Admin panel URL exposed inside a JavaScript file
 
 ## Exploitation Type
 Direct access to unprotected administrative functionality using a hidden endpoint.
