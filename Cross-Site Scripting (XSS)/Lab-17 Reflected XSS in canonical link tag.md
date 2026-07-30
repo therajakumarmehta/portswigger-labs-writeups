@@ -32,7 +32,7 @@ Reflected XSS / Attribute Injection
 
 ## Payload Used
 
-'accesskey='x'onclick='alert(1)
+?'accesskey='x'onclick='alert(1)
 
 ## Result
 Successfully executed arbitrary JavaScript by injecting an event handler into the canonical link tag.
