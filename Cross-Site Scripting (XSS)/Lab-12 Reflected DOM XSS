@@ -5,39 +5,43 @@ Reflected DOM XSS
 Cross-Site Scripting (XSS) – Reflected DOM-Based XSS
 
 ## Objective
-Exploit a DOM-based XSS vulnerability and execute JavaScript in the victim's browser.
+Exploit a reflected DOM XSS vulnerability and execute arbitrary JavaScript in the browser.
 
 ## Entry Point
-URL parameter processed by client-side JavaScript
+Search functionality
 
 ## Exploitation Type
 DOM-Based XSS
 
 ## Methodology
-1. Open the lab and inspect the application's functionality
+1. Open the lab and search for any random value such as:
 
-2. Observe that user input is read from the URL
+   XSS
 
-3. Notice that client-side JavaScript processes the input and inserts it into the page
+2. Intercept the request using **Burp Suite Proxy** and forward it.
 
-4. Identify a vulnerable DOM sink where the input is reflected without proper sanitization
+3. In **Burp Suite**, open the **Site Map** and inspect the JavaScript file:
 
-5. Craft a malicious payload
+   searchResults.js
 
-6. Append the payload to the vulnerable URL parameter
+4. Observe that the search term is returned inside a JSON response and is later processed by an **eval()** function.
 
-7. Load the modified URL
+5. Notice that quotation marks are escaped, but **backslashes are not escaped**, making it possible to break out of the JavaScript context. :contentReference[oaicite:0]{index=0}
 
-8. The browser processes the client-side script
+6. Inject the following payload into the search parameter:
 
-9. Observe that the injected JavaScript executes successfully
+   \"-alert(1)}//
+
+7. Send the request or load the modified URL in the browser.
+
+8. Observe that the payload escapes the JSON string, breaks out of the JavaScript context, and the **alert()** function executes successfully. :contentReference[oaicite:1]{index=1}
 
 ## Payload Used
 
-<svg onload=alert(1)>
+\"-alert(1)}//
 
 ## Result
-Successfully executed arbitrary JavaScript through a reflected DOM-based XSS vulnerability.
+Successfully executed arbitrary JavaScript through a reflected DOM XSS vulnerability by exploiting unsafe use of **eval()**, solving the lab.
 
 ## Impact
 - Execution of arbitrary JavaScript
@@ -45,15 +49,13 @@ Successfully executed arbitrary JavaScript through a reflected DOM-based XSS vul
 - Cookie theft
 - Phishing attacks
 - Account compromise
-- Manipulation of page content
 
 ## Mitigation
-- Sanitize and validate all user-controlled input
-- Avoid inserting untrusted data into DOM sinks
-- Use safe APIs such as textContent instead of innerHTML
-- Implement Content Security Policy (CSP)
-- Perform context-aware output encoding
+- Never use **eval()** with untrusted user input.
+- Sanitize and validate all client-side input.
+- Use safe alternatives such as `JSON.parse()` instead of `eval()`.
+- Implement Content Security Policy (CSP).
+- Perform context-aware output encoding.
 
 ## Learning
-DOM-based XSS occurs when client-side JavaScript processes untrusted input and inserts it into the DOM without proper sanitization.
-Unlike traditional reflected XSS, the vulnerability exists entirely in the browser and may not be visible in the server response.
+This vulnerability occurs because the application reflects user input into a JSON response and later processes it using **eval()**. Although quotation marks are escaped, the application fails to escape backslashes, allowing an attacker to terminate the JavaScript string and inject arbitrary code. Avoiding dangerous functions such as **eval()** and using secure JSON parsing methods prevents this type of DOM XSS. :contentReference[oaicite:2]{index=2}
