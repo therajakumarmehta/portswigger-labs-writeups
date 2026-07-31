@@ -5,7 +5,7 @@ CSRF where Referer validation depends on header being present
 Cross-Site Request Forgery (CSRF) – Referer Header Validation Bypass
 
 ## Objective
-Exploit a CSRF vulnerability by bypassing Referer header validation and change the victim's email address.
+Bypass the application's Referer-based CSRF protection and change the victim's email address.
 
 ## Entry Point
 Change Email functionality
@@ -14,64 +14,72 @@ Change Email functionality
 Cross-Site Request Forgery (CSRF)
 
 ## Methodology
-1. Open the lab and log in using the provided credentials
+1. Open Burp's browser and log in using the provided user credentials.
 
-2. Navigate to the "My Account" page
+2. Navigate to the **My Account** page and submit the **Update email** form.
 
-3. Change the email address and intercept the request using Burp Suite
+3. In **Burp Suite**, locate the **POST /my-account/change-email** request in **Proxy > HTTP History**.
 
-4. Observe that the application validates the Referer header only if it is present
+4. Send the request to **Burp Repeater**.
 
-5. Generate a CSRF PoC using Burp Suite
+5. Modify the **Referer** header by changing its domain to any arbitrary value and send the request.
 
-6. Modify the exploit page to include the following meta tag to suppress the Referer header
+6. Observe that the server rejects the request because the **Referer** header no longer contains the expected domain.
 
-   <meta name="referrer" content="no-referrer">
+7. Delete the **Referer** header completely and resend the request.
 
-7. Upload the exploit to the Exploit Server
+8. Observe that the server accepts the request even though the **Referer** header is missing, indicating that the application validates the header only when it is present.
 
-8. Deliver the exploit to the victim
+9. Open the **Exploit Server** and generate a CSRF proof of concept based on the email change request.
 
-9. When the victim visits the malicious page, the browser omits the Referer header and submits the forged request
+10. Add the following meta tag inside the `<head>` section of the exploit to suppress the **Referer** header:
 
-10. Observe that the application accepts the request and the victim's email address is changed successfully, solving the lab
+```html
+<meta name="referrer" content="no-referrer">
+```
+
+11. Modify the email address in the exploit so that it points to an attacker-controlled email address.
+
+12. Store the exploit and click **View exploit** to verify that the request executes successfully.
+
+13. Click **Deliver to victim**.
+
+14. When the victim visits the exploit page, the browser omits the **Referer** header due to the meta tag. Since the application only validates the Referer when it is present, the request is accepted and the victim's email address is changed, solving the lab.
 
 ## Payload Used
 
 ```html
 <html>
-  <head>
-    <meta name="referrer" content="no-referrer">
-  </head>
-  <body>
-    <form action="https://0ae00064047648ae80b767f4008d0084.web-security-academy.net/my-account/change-email" method="POST">
-      <input type="hidden" name="email" value="xyz@gmail.com">
-    </form>
-
-    <script>
-      document.forms[0].submit();
-    </script>
-  </body>
+<head>
+<meta name="referrer" content="no-referrer">
+</head>
+<body>
+<form action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email" method="POST">
+<input type="hidden" name="email" value="attacker@example.com">
+</form>
+<script>
+document.forms[0].submit();
+</script>
+</body>
 </html>
 ```
 
 ## Result
-Successfully bypassed the Referer header validation by removing the Referer header and changed the victim's email address.
+Successfully bypassed the application's Referer-based CSRF protection by suppressing the **Referer** header and changed the victim's email address.
 
 ## Impact
 - Unauthorized account modifications
 - Bypass of Referer-based CSRF protection
 - User impersonation
 - Account takeover opportunities
-- Sensitive information modification
+- Unauthorized execution of sensitive actions
 
 ## Mitigation
-- Do not rely solely on the Referer header for CSRF protection
-- Implement unpredictable CSRF tokens
-- Validate both Origin and Referer headers where appropriate
-- Use SameSite cookies
-- Perform server-side validation for all state-changing requests
+- Do not rely solely on the **Referer** header for CSRF protection.
+- Reject requests when the **Referer** or **Origin** header is missing or invalid.
+- Implement unpredictable CSRF tokens for all state-changing requests.
+- Validate the authenticated user's session before processing sensitive operations.
+- Use **SameSite** cookies as an additional layer of defense rather than the primary protection mechanism.
 
 ## Learning
-Applications should not treat the absence of a Referer header as a valid request.
-Referer-based validation alone is unreliable because browsers or attackers can suppress the header, making robust CSRF token validation essential.
+This vulnerability occurs because the application validates the **Referer** header only when it is present. By suppressing the header using the **`<meta name="referrer" content="no-referrer">`** tag, an attacker can force the browser to omit the Referer completely. Since the server accepts requests with a missing Referer header, the CSRF protection can be bypassed, allowing unauthorized actions to be performed on behalf of the victim.
