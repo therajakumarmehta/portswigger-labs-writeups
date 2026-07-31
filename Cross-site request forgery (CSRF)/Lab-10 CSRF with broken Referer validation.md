@@ -5,7 +5,7 @@ CSRF with broken Referer validation
 Cross-Site Request Forgery (CSRF) – Broken Referer Validation
 
 ## Objective
-Exploit a CSRF vulnerability by bypassing the application's flawed Referer header validation and change the victim's email address.
+Exploit the application's flawed Referer validation to bypass the CSRF protection and change the victim's email address.
 
 ## Entry Point
 Change Email functionality
@@ -14,43 +14,84 @@ Change Email functionality
 Cross-Site Request Forgery (CSRF)
 
 ## Methodology
-1. Open the lab and log in using the provided credentials
+1. Open Burp's browser and log in using the provided user credentials.
 
-2. Navigate to the "My Account" page
+2. Navigate to the **My Account** page and submit the **Update email** form.
 
-3. Change the email address and intercept the request using Burp Suite
+3. In **Burp Suite**, locate the **POST /my-account/change-email** request in **Proxy > HTTP History**.
 
-4. Observe that the application checks whether the Referer header contains its own domain instead of validating the entire origin
+4. Send the request to **Burp Repeater**.
 
-5. Generate a CSRF PoC using Burp Suite
+5. Modify the **Referer** header by replacing the original domain with an arbitrary domain and send the request.
 
-6. Modify the exploit page so that its URL contains the target domain as a query parameter
+6. Observe that the server rejects the request because the Referer header no longer contains the expected domain.
 
-7. Add the following meta tag to ensure the query string is included in the Referer header
+7. Copy the original domain of your lab instance and append it to the arbitrary domain as a query string.
 
-   <meta name="referrer" content="unsafe-url">
+Example:
 
-8. Upload the exploit to the Exploit Server
+```http
+Referer: https://xyz.com?0a9f001703c455dd80ae03ac008100ec.web-security-academy.net
+```
 
-9. Deliver the exploit to the victim
+8. Send the modified request again.
 
-10. When the victim visits the exploit page, the Referer header contains the target domain in the URL, causing the application's validation to pass
+9. Observe that the request is accepted, indicating that the application only checks whether the expected domain appears anywhere within the Referer header instead of validating its actual origin.
 
-11. Observe that the victim's email address is changed successfully, solving the lab
+10. Open the **Exploit Server** and generate a CSRF proof of concept from the email change request.
+
+11. Modify the generated JavaScript by updating the third parameter of the **history.pushState()** function as follows:
+
+```javascript
+history.pushState("", "", "/?0a9f001703c455dd80ae03ac008100ec.web-security-academy.net")
+```
+
+12. This causes the browser to include the target application's URL inside the query string of the Referer header, allowing it to satisfy the application's weak validation.
+
+13. In the **Exploit Server**, add the following header to the **Head** section:
+
+```http
+Referrer-Policy: unsafe-url
+```
+
+14. This ensures that the browser includes the complete URL, including the query string, in the Referer header instead of stripping it.
+
+15. Modify the email address in the exploit so that it points to an attacker-controlled email address.
+
+16. Store the exploit and click **View exploit** to verify that the request is accepted.
+
+17. Click **Deliver to victim**.
+
+18. When the victim visits the exploit page, the browser sends a Referer header containing the target domain inside the query string. Because the application only checks for the presence of the expected domain anywhere in the Referer header, the CSRF request is accepted and the victim's email address is changed successfully, solving the lab.
 
 ## Payload Used
 
+### Referer Header
+
+```http
+Referer: https://xyz.com?0a9f001703c455dd80ae03ac008100ec.web-security-academy.net
+```
+
+### JavaScript
+
+```javascript
+history.pushState("", "", "/?0a9f001703c455dd80ae03ac008100ec.web-security-academy.net")
+```
+
+### Exploit Server Header
+
+```http
+Referrer-Policy: unsafe-url
+```
 ```html
 <html>
-  <head>
-    <meta name="referrer" content="unsafe-url">
-  </head>
   <body>
-    <form action="https://0a2b008a0480e66b808194110099006d.web-security-academy.net/my-account/change-email" method="POST">
-      <input type="hidden" name="email" value="xyz@gmail.com">
+    <form action="https://0a9f001703c455dd80ae03ac008100ec.web-security-academy.net/my-account/change-email" method="POST">
+      <input type="hidden" name="email" value="xyz@example.com">
     </form>
 
     <script>
+      history.pushState("", "", "/?0a9f001703c455dd80ae03ac008100ec.web-security-academy.net");
       document.forms[0].submit();
     </script>
   </body>
@@ -58,22 +99,21 @@ Cross-Site Request Forgery (CSRF)
 ```
 
 ## Result
-Successfully bypassed the broken Referer validation and changed the victim's email address.
+Successfully bypassed the application's broken Referer validation and changed the victim's email address by crafting a Referer header that contained the expected domain within its query string.
 
 ## Impact
 - Unauthorized account modifications
 - Bypass of Referer-based CSRF protection
 - User impersonation
 - Account takeover opportunities
-- Sensitive information modification
+- Unauthorized execution of sensitive actions
 
 ## Mitigation
-- Do not rely solely on the Referer header for CSRF protection
-- Validate the full Origin or Referer header instead of checking for a substring
-- Implement unpredictable CSRF tokens
-- Use SameSite cookies
-- Perform server-side validation for all state-changing requests
+- Never validate the Referer header using substring matching.
+- Verify that the Referer or Origin header exactly matches the expected trusted origin.
+- Implement unpredictable CSRF tokens for all state-changing requests.
+- Use SameSite cookies as an additional layer of defense.
+- Perform strict server-side validation before processing sensitive requests.
 
 ## Learning
-Checking only whether the Referer header contains the application's domain is an insecure validation method.
-Attackers can craft URLs that include the target domain in the Referer, allowing them to bypass the protection. Proper CSRF tokens and strict Origin/Referer validation should always be implemented.
+This vulnerability exists because the application performs an insecure Referer validation by checking only whether the expected domain appears anywhere within the header. By placing the legitimate domain inside the query string of an attacker-controlled URL and forcing the browser to include the full Referer using **Referrer-Policy: unsafe-url**, an attacker can bypass the Referer validation and perform a successful CSRF attack.
