@@ -5,7 +5,7 @@ SameSite Lax bypass via method override
 Cross-Site Request Forgery (CSRF) – SameSite Lax Bypass via HTTP Method Override
 
 ## Objective
-Exploit a CSRF vulnerability by bypassing the SameSite Lax cookie restriction using the HTTP method override technique and change the victim's email address.
+Exploit the application's HTTP method override functionality to bypass the SameSite=Lax restriction and change the victim's email address.
 
 ## Entry Point
 Change Email functionality
@@ -14,62 +14,70 @@ Change Email functionality
 Cross-Site Request Forgery (CSRF)
 
 ## Methodology
-1. Open the lab and log in using the provided credentials
+1. Open Burp's browser and log in using the provided user credentials.
 
-2. Navigate to the "My Account" page
+2. Navigate to the **My Account** page and change your email address.
 
-3. Change the email address and intercept the request using Burp Suite
+3. Intercept the request using **Burp Suite Proxy** and locate the **POST /my-account/change-email** request in **HTTP History**.
 
-4. Observe that the application accepts the `_method=POST` parameter to override the HTTP method
+4. Observe that the request does not contain any unpredictable CSRF token.
 
-5. Modify the request to use the GET method while adding the `_method=POST` parameter
+5. Inspect the response to the **POST /login** request and notice that the session cookie is issued without an explicit **SameSite** attribute, meaning the browser applies the default **SameSite=Lax** policy.
 
-6. Verify that the request is processed as a POST request by the application
+6. Send the **POST /my-account/change-email** request to **Burp Repeater**.
 
-7. Generate a CSRF PoC using the modified GET request
+7. Right-click the request and select **Change request method** to convert it into a **GET** request.
 
-8. Upload the exploit to the Exploit Server
+8. Send the request and observe that the endpoint rejects GET requests.
 
-9. Deliver the exploit to the victim
+9. Modify the request by adding the **_method=POST** parameter to the query string.
 
-10. When the victim visits the malicious page, the browser sends the request along with the SameSite=Lax cookie because it is a top-level GET request
+```http
+GET /my-account/change-email?email=test@web-security-academy.net&_method=POST HTTP/1.1
+```
 
-11. Observe that the email address is changed successfully, solving the lab
+10. Send the modified request and observe that the server accepts it and updates the email address.
+
+11. Open the **Exploit Server** and create the following exploit:
+
+```html
+<script>
+document.location="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email?email=attacker@example.com&_method=POST";
+</script>
+```
+
+12. Store the exploit and click **View exploit** to verify that your email address changes successfully.
+
+13. Change the email address in the exploit so that it does not match your own.
+
+14. Click **Deliver to victim**.
+
+15. When the victim visits the exploit page, the browser performs a top-level **GET** navigation. Because of the default **SameSite=Lax** policy, the session cookie is included, while the **_method=POST** parameter causes the server to process the request as a POST request, changing the victim's email address and solving the lab.
 
 ## Payload Used
 
 ```html
-<html>
-  <body>
-    <form action="https://0a9300a203419bda82a7b66700d50085.web-security-academy.net/my-account/change-email" method="GET">
-      <input type="hidden" name="_method" value="POST">
-      <input type="hidden" name="email" value="xyz@gmail.com">
-    </form>
-
-    <script>
-      document.forms[0].submit();
-    </script>
-  </body>
-</html>
+<script>
+document.location="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email?email=attacker@example.com&_method=POST";
+</script>
 ```
 
 ## Result
-Successfully bypassed the SameSite Lax protection using the HTTP method override technique and changed the victim's email address.
+Successfully bypassed the SameSite=Lax restriction using the HTTP method override feature and changed the victim's email address.
 
 ## Impact
 - Unauthorized account modifications
-- Bypass of SameSite cookie protection
+- Bypass of SameSite=Lax protection
 - User impersonation
 - Account takeover opportunities
 - Sensitive information modification
 
 ## Mitigation
-- Do not rely solely on SameSite cookies for CSRF protection
-- Disable unnecessary HTTP method override functionality
-- Implement server-side CSRF token validation
-- Validate Origin and Referer headers
-- Require proper HTTP methods for sensitive operations
+- Disable unnecessary HTTP method override functionality.
+- Enforce the expected HTTP method on the server.
+- Implement unpredictable CSRF tokens.
+- Explicitly configure cookies with appropriate SameSite attributes.
+- Validate Origin and Referer headers for sensitive requests.
 
 ## Learning
-SameSite=Lax provides protection only in specific scenarios and can be bypassed if an application supports HTTP method override.
-Applications should implement robust server-side CSRF defenses instead of relying solely on browser cookie policies.
+SameSite=Lax cookies are included in top-level GET navigations. If an application supports HTTP method override using parameters such as **_method=POST**, an attacker can force the browser to send an authenticated GET request that the server interprets as a POST request, effectively bypassing the SameSite=Lax protection.
