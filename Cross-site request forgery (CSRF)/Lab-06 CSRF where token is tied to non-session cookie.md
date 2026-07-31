@@ -39,7 +39,7 @@ Cross-Site Request Forgery (CSRF) / Cookie Injection
 12. Create the following URL using your own **csrfKey** value:
 
 ```
-/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None
+/?search=test%0d%0aSet-Cookie:%20csrfKey=CSRF_KEY%3b%20SameSite=None
 ```
 
 13. Generate a **CSRF PoC** from the email change request using Burp Suite.
