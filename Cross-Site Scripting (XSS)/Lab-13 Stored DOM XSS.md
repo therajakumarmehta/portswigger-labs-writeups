@@ -34,7 +34,7 @@ Stored DOM-Based XSS
 
 ## Payload Used
 
-<img src=x onerror=alert(1)>
+    <><img src=x onerror=alert(1)>
 
 ## Result
 Successfully stored a malicious payload that executes JavaScript whenever the affected page is viewed.
