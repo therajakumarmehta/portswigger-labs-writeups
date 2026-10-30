@@ -16,13 +16,13 @@ DOM-Based XSS
 ## Methodology
 1. Open the lab and search for any random value such as:
 
-   XSS
+       XSS
 
 2. Intercept the request using **Burp Suite Proxy** and forward it.
 
 3. In **Burp Suite**, open the **Site Map** and inspect the JavaScript file:
 
-   searchResults.js
+       searchResults.js
 
 4. Observe that the search term is returned inside a JSON response and is later processed by an **eval()** function.
 
@@ -30,7 +30,7 @@ DOM-Based XSS
 
 6. Inject the following payload into the search parameter:
 
-   \"-alert(1)}//
+       \"-alert(1)}//
 
 7. Send the request or load the modified URL in the browser.
 
@@ -38,7 +38,7 @@ DOM-Based XSS
 
 ## Payload Used
 
-\"-alert(1)}//
+    \"-alert(1)}//
 
 ## Result
 Successfully executed arbitrary JavaScript through a reflected DOM XSS vulnerability by exploiting unsafe use of **eval()**, solving the lab.
