@@ -37,7 +37,7 @@ Reflected XSS / JavaScript Context Injection
 
 ## Payload Used
 
-\'-alert(1)// 
+    \'-alert(1)//
 
 ## Result
 Successfully executed arbitrary JavaScript by escaping the JavaScript string and injecting executable code.
