@@ -27,7 +27,7 @@ Stored XSS / JavaScript Context Injection
 
 5. Craft a payload that breaks out of the JavaScript string and injects executable JavaScript
 
-6. Submit the payload in the comment field
+6. Submit the payload in the website field
 
 7. Publish the comment
 
@@ -37,7 +37,7 @@ Stored XSS / JavaScript Context Injection
 
 ## Payload Used
 
-&#39;-alert(1)-&#39;
+    &#39;-alert(1)-&#39;
 
 ## Result
 Successfully executed arbitrary JavaScript through a stored XSS vulnerability in an onclick event.
