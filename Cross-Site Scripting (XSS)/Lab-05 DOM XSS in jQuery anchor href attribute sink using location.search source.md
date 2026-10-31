@@ -18,7 +18,7 @@ DOM-Based XSS
 
 2. Observe that user input is taken from:
 
-   location.search
+       location.search
 
 3. Notice that the value is inserted into an anchor tag's href attribute using jQuery
 
@@ -36,7 +36,7 @@ DOM-Based XSS
 
 ## Payload Used
 
-javascript:alert(1)
+    javascript:alert(1)
 
 ## Result
 Successfully executed arbitrary JavaScript through a DOM-based XSS vulnerability in a jQuery href attribute sink.
