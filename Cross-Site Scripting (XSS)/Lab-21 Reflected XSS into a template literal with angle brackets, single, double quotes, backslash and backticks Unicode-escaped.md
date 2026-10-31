@@ -37,7 +37,7 @@ Reflected XSS / JavaScript Template Literal Injection
 
 ## Payload Used
 
-${alert(1)}
+    ${alert(1)}
 
 ## Result
 Successfully executed arbitrary JavaScript by injecting an expression into a JavaScript template literal.
